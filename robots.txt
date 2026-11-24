@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lovely-bunny-7e8187.netlify.app/sitemap.xml

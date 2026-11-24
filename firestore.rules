@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner() {
+      return request.auth != null && request.auth.token.email.lower() == "rabiaparbin7860@gmail.com";
+    }
+    function isSelf(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    match /cakes/{id}  { allow read: if true; allow write: if isOwner(); }
+    match /meta/{id}   { allow read: if true; allow write: if isOwner(); }
+    match /orderIndex/{uid} { allow read, write: if isOwner() || isSelf(uid); }
+    match /feedback/{uid}   { allow read, write: if isOwner() || isSelf(uid); }
+  }
+}
